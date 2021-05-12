@@ -10,7 +10,7 @@ const { default: axios } = require('axios');
 //const api =  "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";
 const api=process.env.api_key;
 /////// define port and express ///////////
-const port = 5000;
+const port = process.env.PORT || 5000;
 const app = express();
 /////////  middleware uses ////////////////
 app.use(express.urlencoded({ extended: true }));
@@ -160,6 +160,6 @@ app.post("/", async(req, res) => {
 });
 
 ///// run express server /////////////
-app.listen(process.env.PORT || port, ()=> {
+app.listen(port, ()=> {
     console.log(`SendGrid app listening at http://localhost:${port}`);
 });
