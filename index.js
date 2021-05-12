@@ -7,7 +7,8 @@ const { default: axios } = require('axios');
 ////////// sendgrid api key ///////////
 //const api = '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';
 //const api = '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';
-const api =  "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";
+//const api =  "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";
+const api=process.env.api_key;
 /////// define port and express ///////////
 const port = 5000;
 const app = express();
