@@ -160,6 +160,6 @@ app.post("/", async(req, res) => {
 });
 
 ///// run express server /////////////
-app.listen(port, ()=> {
+app.listen(process.env.PORT || port, ()=> {
     console.log(`SendGrid app listening at http://localhost:${port}`);
 });
