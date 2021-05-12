@@ -8,9 +8,9 @@ const { default: axios } = require('axios');
 //const api = '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';
 //const api = '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';
 //const api =  "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";
-const api=process.env.api_key;
+const api=process.env.API_KEY;
 /////// define port and express ///////////
-const port = process.env.PORT || 5000;
+const port =process.env.PORT || 5000;
 const app = express();
 /////////  middleware uses ////////////////
 app.use(express.urlencoded({ extended: true }));
@@ -67,7 +67,7 @@ success and failure emails may not be accurate",
             method:"post",
             url:"https://api.sendgrid.com/v3/mail/send",
             headers:{
-                Authorization:"Bearer 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"
+                Authorization:`Bearer ${api}`
             },
             data:{
                 personalizations:personalizations,
@@ -98,7 +98,7 @@ success and failure emails may not be accurate",
 async function fetch(emails){
   var data=await axios.get("https://api.sendgrid.com/v3/suppression/bounces", {
   headers: {
-    'Authorization': "Bearer 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",
+    'Authorization': `Bearer ${api}`,
     "accept": "application/json"
   }
 })
