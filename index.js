@@ -7,8 +7,8 @@ const { default: axios } = require('axios');
 ////////// sendgrid api key ///////////
 //const api = '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';
 //const api = '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';
-//const api =  "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";
-const api=process.env.API_KEY;
+const api =  "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";
+//const api=process.env.API_KEY;
 /////// define port and express ///////////
 const port =process.env.PORT || 5000;
 const app = express();
@@ -85,6 +85,7 @@ success and failure emails may not be accurate",
         var results=await fetch(emails);    /////////// fetch bounce and sent emails seperately/////////
         return results;
       }catch(err){
+          return err;
           console.log("error",err);
       }
       
@@ -155,7 +156,9 @@ app.post("/", async(req, res) => {
         res.send(ans);
     }
     catch (err) {
-        res.send(err);
+      return res.json(500, {
+        message: "internal server error",
+      });
     }
 });
 
