@@ -5,7 +5,7 @@ const fs=require("fs");
 const cors=require("cors");
 const { default: axios } = require('axios');
 ////////// sendgrid api key ///////////
-//const api =  "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";
+
 const api=process.env.API_KEY;
 /////// define port and express ///////////
 const port =process.env.PORT || 5000;
@@ -70,7 +70,7 @@ const ResponseMessage = {
             method:"post",
             url:"https://api.sendgrid.com/v3/mail/send",
             headers:{
-                Authorization:"Bearer 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"
+                Authorization:`Bearer ${api}`
             },
             data:{
                 personalizations:personalizations,
@@ -103,7 +103,7 @@ const ResponseMessage = {
 async function fetch(emails){
   var data=await axios.get("https://api.sendgrid.com/v3/suppression/bounces", {
   headers: {
-    'Authorization':"Bearer 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",
+    'Authorization':`Bearer ${api}`,
     "accept": "application/json"
   }
 })
