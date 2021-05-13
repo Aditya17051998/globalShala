@@ -203,7 +203,7 @@ success and failure emails may not be accurate",
 
 
   
- async function sendMail(data){
+ function sendMail(data){
    /////////// get data which send by user ////////////
    let message=data.emailMessage;
    //// get the file data and encode the path of attachments into base64 ////////
