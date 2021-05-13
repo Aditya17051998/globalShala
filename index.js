@@ -156,7 +156,7 @@ app.get("/", async(req, res) => {
        "type":"to"
      }],
      "emailMessage":"hi {name} , <b>your result is {status}</b>",
-     "attachments":[{"filename":"krishna.jpg","path":"C:/Users/hp/OneDrive/Pictures/wallpaper/633311.jpg"}]
+     "attachments":[{"filename":"krishna.jpg","path":`${__dirname}+'/krishna.jpg`}]
     
     }
   
