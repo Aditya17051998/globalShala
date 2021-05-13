@@ -18,12 +18,10 @@ app.use(cors());
 //////// set ket in sendgrid client ///
 SgClient.setApiKey(api);
 sgMail.setApiKey(api);
-//sgMail.setSubstitutionWrappers("{", "}");
 ///////////// final response message ////////////////
 const ResponseMessage = {
   status: 200,
-  message: "WARNING: Since SendGrid's API is Asynchronus in nature, so list of \
-success and failure emails may not be accurate",
+  message: "WARNING: Since SendGrid's API is take time to get bounce email so list of success and failer email result may be differ",
   data: {
       success: [],
       failure: [],
@@ -81,18 +79,16 @@ success and failure emails may not be accurate",
                     name:"aadi"
                 },
                 attachments: attachments,
-                subject:"hii there",
+                subject:"message from globalshala",
                 content:[{type:"text/html",value:message}]
             }
         });
         ////// use sleep function if you want to get accurate bounce emails
         //await sleep(60000);  /////////// to stop processing untill some emails get bounce 
-        //let data = await sgMail.send(msg);
-    //RetriveInvalidEmails(res, Emails);
+        
         var results=await fetch(emails);    /////////// fetch bounce and sent emails seperately/////////
           return results;
       }catch(err){
-          //console.log("error",err);
           return err;
           
       }
@@ -134,9 +130,9 @@ return ResponseMessage;
 }
 
 ///////////// set server route /////////////
-// app.get('/',(req,res)=>{
-//     res.send("hello");
-// })
+app.get('/',(req,res)=>{
+    res.send(GetResponse);
+})
 app.post("/", async(req, res) => {
   
     try {
@@ -158,3 +154,11 @@ app.post("/", async(req, res) => {
 app.listen(port, ()=> {
     console.log(`SendGrid app listening at http://localhost:${port}`);
 });
+
+const GetResponse = `<pre>How To Use This API
+    1. Method of request must be POST
+    2. URL is https://globalshalamail.herokuapp.com/
+    3. Set the headers of request as follows:
+        a. 'Accept':'application/json, text/plain, /'
+        b. 'Content-Type':'application/json'
+    4. Set the body of request, for syntax check the /input formate/sample.txt</pre>`;

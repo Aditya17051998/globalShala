@@ -1,0 +1,69 @@
+Input formate 1 
+
+{
+     "userData":[{
+        "email":"kushwahaa862@gmail.com",
+        "name":"aditya",
+        "status":"pass",
+        "type":"to"
+      },
+      {
+        "email":"kushwahaa1705@gmail.com",
+        "name":"aysha",
+        "status":"pass",
+        "type":"to"
+      }],
+      "emailMessage":"hi {name} , <b>your result is {status}</b>",
+      "attachments":[{"filename":"krishna.jpg","path":"/attachment/633311.jpg"}]
+     
+     }
+
+output formate 1
+
+"message": {
+        "status": 200,
+        "message": "WARNING: Since SendGrid's API is take time to get bounce email so list of success and failer email result may be differ",
+        "data": {
+            "success": [
+                "kushwahaa862@gmail.com",
+                "kushwahaa1705@gmail.com"
+            ],
+            "failure": []
+        }
+    }
+}
+
+Input formate 2
+
+{
+     "userData":[{
+        "email":"kushwahavishesh95@gmail.com",
+        "name":"rohan",
+        "status":"pass",
+        "type":"to"
+      },
+      {
+        "email":"singharush537@gmail.com",
+        "name":"Raj",
+        "status":"pass",
+        "type":"to"
+      }],
+      "emailMessage":"hi {name} , <b>your result is {status}</b>",
+      "attachments":[{"filename":"krishna.jpg","path":"/attachment/633460.jpg"}]
+     
+     }
+
+output formate 2
+
+"message": {
+        "status": 200,
+        "message": "WARNING: Since SendGrid's API is take time to get bounce email so list of success and failer email result may be differ",
+        "data": {
+            "success": [
+                "singharush537@gmail.com",
+                "kushwahavishesh95@gmail.com"
+            ],
+            "failure": []
+        }
+    }
+}
