@@ -5,8 +5,8 @@ const fs=require("fs");
 const cors=require("cors");
 const { default: axios } = require('axios');
 ////////// sendgrid api key ///////////
-const api =  "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";
-//const api=process.env.API_KEY;
+//const api =  "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";
+const api=process.env.API_KEY;
 /////// define port and express ///////////
 const port =process.env.PORT || 5000;
 const app = express();
