@@ -204,55 +204,55 @@ success and failure emails may not be accurate",
 
   
  function sendMail(data){
-   /////////// get data which send by user ////////////
-   let message=data.emailMessage;
-   //// get the file data and encode the path of attachments into base64 ////////
-   let attachments = data.attachments.map((value) => {
-       const content = fs.readFileSync(value.path, "base64");
-       return { content: content, filename: value.filename };
-   });
-   let personalizations=[];
-   let emails=[];
-   /////// get user details one by one and set it into personalizations //////////
-   data.userData.map((singleUser)=>{
-     if(emails.find((email)=>{return email==singleUser.email})){
-     }else{
-       emails.push(singleUser.email);
-     }
-     let tempData = {
-      to: "default@default.com",
-      [singleUser.type]: [{ email: singleUser.email }],
-      substitutions: {}
-     };
-     for (let value in singleUser) {
-      if (value !== "email" && value !== "type") {
-          tempData.substitutions[`{${value}}`] = singleUser[value];
-      }
-    }
-   //////////  push user data into personalizations array ///////////////
-    personalizations.push(tempData);
+  //  /////////// get data which send by user ////////////
+  //  let message=data.emailMessage;
+  //  //// get the file data and encode the path of attachments into base64 ////////
+  //  let attachments = data.attachments.map((value) => {
+  //      const content = fs.readFileSync(value.path, "base64");
+  //      return { content: content, filename: value.filename };
+  //  });
+  //  let personalizations=[];
+  //  let emails=[];
+  //  /////// get user details one by one and set it into personalizations //////////
+  //  data.userData.map((singleUser)=>{
+  //    if(emails.find((email)=>{return email==singleUser.email})){
+  //    }else{
+  //      emails.push(singleUser.email);
+  //    }
+  //    let tempData = {
+  //     to: "default@default.com",
+  //     [singleUser.type]: [{ email: singleUser.email }],
+  //     substitutions: {}
+  //    };
+  //    for (let value in singleUser) {
+  //     if (value !== "email" && value !== "type") {
+  //         tempData.substitutions[`{${value}}`] = singleUser[value];
+  //     }
+  //   }
+  //  //////////  push user data into personalizations array ///////////////
+  //   personalizations.push(tempData);
     
 
-   });
+  //  });
   
        try{
-  //           await axios({
-  //           method:"post",
-  //           url:"https://api.sendgrid.com/v3/mail/send",
-  //           headers:{
-  //               Authorization:"Bearer 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"
-  //           },
-  //           data:{
-  //               personalizations:personalizations,
-  //               from:{
-  //                   email:"pachory1997@gmail.com",
-  //                   name:"aadi"
-  //               },
-  //               attachments: attachments,
-  //               subject:"hii there",
-  //               content:[{type:"text/html",value:message}]
-  //           }
-  //       });
+        //     await axios({
+        //     method:"post",
+        //     url:"https://api.sendgrid.com/v3/mail/send",
+        //     headers:{
+        //         Authorization:"Bearer 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"
+        //     },
+        //     data:{
+        //         personalizations:personalizations,
+        //         from:{
+        //             email:"pachory1997@gmail.com",
+        //             name:"aadi"
+        //         },
+        //         attachments: attachments,
+        //         subject:"hii there",
+        //         content:[{type:"text/html",value:message}]
+        //     }
+        // });
         ////// use sleep function if you want to get accurate bounce emails
         //await sleep(60000);  /////////// to stop processing untill some emails get bounce 
         //let data = await sgMail.send(msg);
@@ -306,9 +306,56 @@ app.get('/',(req,res)=>{
     res.send("hello");
 })
 app.post("/", async(req, res) => {
+  /////////// get data which send by user ////////////
+  let message=data.emailMessage;
+  //// get the file data and encode the path of attachments into base64 ////////
+  let attachments = data.attachments.map((value) => {
+      const content = fs.readFileSync(value.path, "base64");
+      return { content: content, filename: value.filename };
+  });
+  let personalizations=[];
+  let emails=[];
+  /////// get user details one by one and set it into personalizations //////////
+  data.userData.map((singleUser)=>{
+    if(emails.find((email)=>{return email==singleUser.email})){
+    }else{
+      emails.push(singleUser.email);
+    }
+    let tempData = {
+     to: "default@default.com",
+     [singleUser.type]: [{ email: singleUser.email }],
+     substitutions: {}
+    };
+    for (let value in singleUser) {
+     if (value !== "email" && value !== "type") {
+         tempData.substitutions[`{${value}}`] = singleUser[value];
+     }
+   }
+  //////////  push user data into personalizations array ///////////////
+   personalizations.push(tempData);
+   
+
+  });
 
     try {
-      let ans=sendMail(req.body);
+      await axios({
+        method:"post",
+        url:"https://api.sendgrid.com/v3/mail/send",
+        headers:{
+            Authorization:"Bearer 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"
+        },
+        data:{
+            personalizations:personalizations,
+            from:{
+                email:"pachory1997@gmail.com",
+                name:"aadi"
+            },
+            attachments: attachments,
+            subject:"hii there",
+            content:[{type:"text/html",value:message}]
+        }
+    });
+      //let ans=sendMail(req.body);
       //   res.send(ans);
       return res.json(200,{
         message:ResponseMessage
