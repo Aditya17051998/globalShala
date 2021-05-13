@@ -135,35 +135,11 @@ return ResponseMessage;
 // app.get('/',(req,res)=>{
 //     res.send("hello");
 // })
-app.get("/", async(req, res) => {
-  let data = {
-    "userData":[{
-       "email":"kushwahaa1705@gmail.com",
-       "name":"aditya",
-       "status":"pass",
-       "type":"to"
-     },
-     {
-       "email":"ka@gmail.com",
-       "name":"adya",
-       "status":"pass",
-       "type":"to"
-     },
-     {
-       "email":"laa@gmail.com",
-       "name":"adya",
-       "status":"pass",
-       "type":"to"
-     }],
-     "emailMessage":"hi {name} , <b>your result is {status}</b>",
-     "attachments":[{"filename":"krishna.jpg","path":`${__dirname}+'/krishna.jpg`}]
-    
-    }
+app.post("/", async(req, res) => {
   
-
     try {
  
-      var ans=await sendMail(data);
+      var ans=await sendMail(req.body);
       //   res.send(ans);
       return res.json(200,{
         message:ans
