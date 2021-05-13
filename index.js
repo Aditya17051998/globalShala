@@ -307,16 +307,16 @@ app.get('/',(req,res)=>{
 })
 app.post("/", async(req, res) => {
   /////////// get data which send by user ////////////
-  let message=data.emailMessage;
+  let message=req.body.emailMessage;
   //// get the file data and encode the path of attachments into base64 ////////
-  let attachments = data.attachments.map((value) => {
+  let attachments = req.body.attachments.map((value) => {
       const content = fs.readFileSync(value.path, "base64");
       return { content: content, filename: value.filename };
   });
   let personalizations=[];
   let emails=[];
   /////// get user details one by one and set it into personalizations //////////
-  data.userData.map((singleUser)=>{
+  req.body.userData.map((singleUser)=>{
     if(emails.find((email)=>{return email==singleUser.email})){
     }else{
       emails.push(singleUser.email);
