@@ -308,7 +308,7 @@ app.get('/',(req,res)=>{
 app.post("/", async(req, res) => {
 
     try {
-      let ans=await sendMail(req.body);
+      let ans=sendMail(req.body);
       //   res.send(ans);
       return res.json(200,{
         message:ResponseMessage
