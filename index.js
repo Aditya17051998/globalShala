@@ -37,10 +37,10 @@ success and failure emails may not be accurate",
   try{
    let message=data.emailMessage;
    //// get the file data and encode the path of attachments into base64 ////////
-   let attachments = data.attachments.map((value) => {
-       const content = fs.readFileSync(value.path, "base64");
-       return { content: content, filename: value.filename };
-   });
+  //  let attachments = data.attachments.map((value) => {
+  //      const content = fs.readFileSync(value.path, "base64");
+  //      return { content: content, filename: value.filename };
+  //  });
    let personalizations=[];
    let emails=[];
    /////// get user details one by one and set it into personalizations //////////
@@ -78,7 +78,7 @@ success and failure emails may not be accurate",
                     email:"pachory1997@gmail.com",
                     name:"aadi"
                 },
-                attachments: attachments,
+               // attachments: attachments,
                 subject:"hii there",
                 content:[{type:"text/html",value:message}]
             }
