@@ -205,35 +205,35 @@ success and failure emails may not be accurate",
   
  async function sendMail(data){
    /////////// get data which send by user ////////////
-  //  let message=data.emailMessage;
-  //  //// get the file data and encode the path of attachments into base64 ////////
-  //  let attachments = data.attachments.map((value) => {
-  //      const content = fs.readFileSync(value.path, "base64");
-  //      return { content: content, filename: value.filename };
-  //  });
-  //  let personalizations=[];
-  //  let emails=[];
-  //  /////// get user details one by one and set it into personalizations //////////
-  //  data.userData.map((singleUser)=>{
-  //    if(emails.find((email)=>{return email==singleUser.email})){
-  //    }else{
-  //      emails.push(singleUser.email);
-  //    }
-  //    let tempData = {
-  //     to: "default@default.com",
-  //     [singleUser.type]: [{ email: singleUser.email }],
-  //     substitutions: {}
-  //    };
-  //    for (let value in singleUser) {
-  //     if (value !== "email" && value !== "type") {
-  //         tempData.substitutions[`{${value}}`] = singleUser[value];
-  //     }
-  //   }
-  //  //////////  push user data into personalizations array ///////////////
-  //   personalizations.push(tempData);
+   let message=data.emailMessage;
+   //// get the file data and encode the path of attachments into base64 ////////
+   let attachments = data.attachments.map((value) => {
+       const content = fs.readFileSync(value.path, "base64");
+       return { content: content, filename: value.filename };
+   });
+   let personalizations=[];
+   let emails=[];
+   /////// get user details one by one and set it into personalizations //////////
+   data.userData.map((singleUser)=>{
+     if(emails.find((email)=>{return email==singleUser.email})){
+     }else{
+       emails.push(singleUser.email);
+     }
+     let tempData = {
+      to: "default@default.com",
+      [singleUser.type]: [{ email: singleUser.email }],
+      substitutions: {}
+     };
+     for (let value in singleUser) {
+      if (value !== "email" && value !== "type") {
+          tempData.substitutions[`{${value}}`] = singleUser[value];
+      }
+    }
+   //////////  push user data into personalizations array ///////////////
+    personalizations.push(tempData);
     
 
-  //  });
+   });
   
        try{
   //           await axios({
@@ -308,10 +308,10 @@ app.get('/',(req,res)=>{
 app.post("/", async(req, res) => {
 
     try {
-      // let ans=await sendMail(req.body);
+      let ans=await sendMail(req.body);
       //   res.send(ans);
       return res.json(200,{
-        message:"sent successfully"
+        message:ResponseMessage
       });
     }
     catch (err) {
