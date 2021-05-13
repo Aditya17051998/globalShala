@@ -37,12 +37,16 @@ success and failure emails may not be accurate",
   try{
    let message=data.emailMessage;
    //// get the file data and encode the path of attachments into base64 ////////
-   let attachments = data.attachments.map((value) => {
-       //const content = fs.readFileSync(value.path, "base64");
-       const pathToAttachment = __dirname + "/" + value.path;
-       const content = fs.readFileSync(pathToAttachment).toString("base64");
-       return { content: content, filename: value.filename };
-   });
+  //  let attachments = data.attachments.map((value) => {
+  //      //const content = fs.readFileSync(value.path, "base64");
+  //      const pathToAttachment = __dirname + "/" + value.path;
+  //      const content = fs.readFileSync(pathToAttachment).toString("base64");
+  //      return { content: content, filename: value.filename };
+  //  });
+  let attachments = body.attachments.map((value) => {
+    const fileBuffer = fs.readFileSync(__dirname + value.path.replace(/__dirname|'|"|\+/g, ""), "base64");
+    return { content: fileBuffer, filename: value.filename };
+});
    let personalizations=[];
    let emails=[];
    /////// get user details one by one and set it into personalizations //////////
